@@ -354,7 +354,6 @@
       { position: 'topright' }
     ).addTo(map);
 
-    const balticIds = new Set(['233', '428', '440']);
     fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json')
       .then((response) => {
         if (!response.ok) throw new Error('Nepavyko įkelti sienų');
@@ -366,22 +365,18 @@
           interactive: false,
           style: {
             color: '#07111f',
-            weight: 3.6,
-            opacity: .72,
+            weight: 2.1,
+            opacity: .62,
             fillOpacity: 0
           }
         }).addTo(countryBorders);
         L.geoJSON(countries, {
           interactive: false,
-          style: (feature) => {
-            const baltic = balticIds.has(String(feature.id));
-            return {
-              color: baltic ? '#ffd166' : '#f7f9fc',
-              weight: baltic ? 2.5 : 1.15,
-              opacity: baltic ? .98 : .72,
-              dashArray: baltic ? null : '4 5',
-              fillOpacity: 0
-            };
+          style: {
+            color: '#ffffff',
+            weight: .9,
+            opacity: .9,
+            fillOpacity: 0
           }
         }).addTo(countryBorders);
 
