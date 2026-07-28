@@ -285,6 +285,15 @@
          0  2px 5px rgba(0,0,0,.85);
       white-space: nowrap;
     }
+    .country-km {
+      display: block;
+      margin-top: 2px;
+      color: rgba(255, 255, 255, .92);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      line-height: 1;
+    }
     .leaflet-popup-content-wrapper,
     .leaflet-popup-tip {
       background: #101b2c;
@@ -392,19 +401,20 @@
         }).addTo(countryBorders);
 
         [
-          { name: 'LIETUVA', coords: [55.45, 22.70] },
-          { name: 'LATVIJA', coords: [56.72, 25.25] },
-          { name: 'ESTIJA', coords: [58.58, 25.50] },
+          { name: 'LIETUVA', km: '~702 km', coords: [55.45, 22.70] },
+          { name: 'LATVIJA', km: '~406 km', coords: [56.72, 25.25] },
+          { name: 'ESTIJA', km: '~402 km', coords: [58.58, 25.50] },
           { name: 'SUOMIJA', coords: [60.50, 24.35] },
           { name: 'ŠVEDIJA', coords: [59.72, 17.90] }
         ].forEach((country) => {
+          const labelHeight = country.km ? 32 : 20;
           L.marker(country.coords, {
             interactive: false,
             icon: L.divIcon({
               className: 'country-name-icon',
-              html: `<span class="country-name">${country.name}</span>`,
-              iconSize: [110, 20],
-              iconAnchor: [55, 10]
+              html: `<span class="country-name">${country.name}${country.km ? `<small class="country-km">${country.km}</small>` : ''}</span>`,
+              iconSize: [110, labelHeight],
+              iconAnchor: [55, labelHeight / 2]
             })
           }).addTo(countryBorders);
         });
